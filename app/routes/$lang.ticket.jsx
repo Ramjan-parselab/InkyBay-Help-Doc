@@ -84,7 +84,7 @@ export const action = async ({request}) => {
 
             // This method is send a mail to the assign mail
             const  mailResponse = await sendMail({
-                toMail: process.env.INKYBAY_MAIL_RECEIVE_ADDRESS,
+                toMail: process.env.DOCS_INKYBAY_MAIL_RECEIVE_ADDRESS,
                 subject: subject,
                 attachments: attachFile?.name ? 
                     [
