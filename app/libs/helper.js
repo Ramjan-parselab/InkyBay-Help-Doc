@@ -75,7 +75,7 @@ export const validatePhone = (phone) => {
  * @returns {Array} An array of meta tag objects, each containing a `name` or `property` and `content`.
  */
 export const setMetaTag = (siteName="JewelsLab Help Center", title=null, metaTitle=null, metaDescription=null, metaType = "website" ) => {
-    const siteUrl   = `https://beta.docs.inkybay.com`;
+    const siteUrl   = `https://docs.inkybay.com`;
     const metaData = [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
