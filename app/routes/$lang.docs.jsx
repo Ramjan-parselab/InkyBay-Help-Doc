@@ -3,7 +3,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import prisma from "../db.server";
 import { useEffect, useState } from "react";
 import { getSession } from "../services/session.server";
-import Documents from "../components/documents";
+import Documents from "../components/Documents";
 import { setMetaTag } from "../libs/helper";
 import { useTranslation } from "react-i18next";
 
