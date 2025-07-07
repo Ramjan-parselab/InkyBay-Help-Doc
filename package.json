@@ -9,7 +9,7 @@
     "build": "remix vite:build",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "PORT=4002 remix-serve ./build/server/index.js"
+    "start": "PORT=4000 remix-serve ./build/server/index.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
