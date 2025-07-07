@@ -45,8 +45,8 @@ async function main() {
       { name: 'Visit Website ', newTab: false, url: '/privacy', position: 1, status: 'ACTIVE' },
       { name: 'API Docs', newTab: false, url: '/terms', position: 2, status: 'ACTIVE' },
       { name: 'Release Notes', newTab: true, url: '/release-notes', position: 3, status: 'ACTIVE' },
-      { name: 'Privacy Policy', newTab: true, url: '/privacy', position: 4, status: 'ACTIVE' },
-      { name: 'Terms of Service', newTab: true, url: '/terms-service', position: 5, status: 'ACTIVE' }
+      { name: 'Privacy Policy', newTab: true, url: '/en/privacy', position: 4, status: 'ACTIVE' },
+      { name: 'Terms of Service', newTab: true, url: '/en/terms', position: 5, status: 'ACTIVE' }
     ]
   });
 

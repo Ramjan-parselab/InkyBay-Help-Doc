@@ -3,6 +3,8 @@ import TicketForm from "../components/Ticket";
 import prisma from "../db.server";
 import sendMail from "../libs/sendMail";
 import { setMetaTag } from "../libs/helper";
+import Breadcrumb from "../components/Breadcrumb";
+import { useTranslation } from "react-i18next";
 
 export const meta =   () => {
     const siteName = "InkyBay Help Center";
@@ -82,7 +84,7 @@ export const action = async ({request}) => {
 
             // This method is send a mail to the assign mail
             const  mailResponse = await sendMail({
-                toMail: process.env.MAIL_RECEIVE_ADDRESS,
+                toMail: process.env.INKYBAY_MAIL_RECEIVE_ADDRESS,
                 subject: subject,
                 attachments: attachFile?.name ? 
                     [
@@ -129,10 +131,11 @@ export const action = async ({request}) => {
 }
 
 export default function Ticket() {
-    
+    const {t} = useTranslation();
 
     return (
         <div className="flex flex-col min-h-screen">
+            <Breadcrumb selectedCategory={''} activePage={t('ticket')} showSearchBar={false}/>
             <TicketForm />
         </div>
     )

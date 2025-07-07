@@ -220,12 +220,15 @@ export const loader = async ({request, params})=> {
                                     lang: selectedLanguage
                                 }
                             },
+                        },
+                         where:{
+                            id: { gt: helpDocDetails?.id}
                         }
-                   }
+                   },
                },
                where:{
                  status: "ACTIVE",
-                 id: { gt: selectedCategory?.subCategory?.[0]?.id}
+                 slug: subcategorySlug,
                }
             }
         },
@@ -252,12 +255,15 @@ export const loader = async ({request, params})=> {
                                     lang: selectedLanguage
                                 }
                             },
+                        },
+                         where:{
+                            id: { lt: helpDocDetails?.id}
                         }
                    }
                },
                where:{
                  status: "ACTIVE",
-                 id: { lt: selectedCategory?.subCategory?.[0]?.id}
+                 slug: subcategorySlug,
                }
             }
         },
@@ -404,6 +410,8 @@ export default function Details() {
             }
         }
     },[actionData]);
+
+    console.log("nexPageData===", nexPageData)
 
     return (
         <>

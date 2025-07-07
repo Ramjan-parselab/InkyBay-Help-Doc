@@ -48,6 +48,9 @@ export const loader = async ({request, params}) => {
             docsLanguage:{
                 select: {
                     id: true, title: true, shortDescription: true, 
+                },
+                where:{
+                    lang: selectedLanguage,
                 }
             },
             category: {
@@ -128,6 +131,7 @@ export const loader = async ({request, params}) => {
             id: true, 
             title: true,
             url: true,
+            newTab: true,
             supportLanguage:{
                 select: {
                     lang: true,
@@ -306,7 +310,9 @@ export default function Home() {
              {parseInt(noticeData?.visibility) > 0 && (
                 <Notice />
              )}
-            <Featured featuredData={featuredDocsData}/>
+             {featuredDocsData?.length > 0 && (
+                <Featured featuredData={featuredDocsData}/>
+             )}
             <HelpCenter categoryData={categoryData}/>
             <Faq faqData={faqData}/>
             <Support supportData={supportData} />

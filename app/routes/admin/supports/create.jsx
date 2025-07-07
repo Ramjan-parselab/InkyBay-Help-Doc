@@ -27,6 +27,7 @@ export const action = async ({request}) => {
         const submitData = data ?  JSON.parse(data) : {};
         const title = submitData?.title || "";
         const url = submitData?.url || "";
+        const newTab = submitData?.newTab == "true" ? true : false;
         const status = submitData?.status || "";
         let supportLanguage = submitData?.supportLanguage || [];
 
@@ -50,6 +51,7 @@ export const action = async ({request}) => {
                 data:{
                     title: title,
                     url: url,
+                    newTab: newTab,
                     status: status,
                     createdAt: new Date()
                 }
@@ -104,6 +106,7 @@ export default function Create () {
     const [formState, setFormState] = useState({
         title: "",
         url: "",
+        newTab:false,
         status: "ACTIVE",
         supportLanguage: [],
         
@@ -112,6 +115,7 @@ export default function Create () {
     const [formError, setFormError] = useState({
         title: "",
         url: "",
+        newTab:false,
         status: "",
     });
 
@@ -132,6 +136,10 @@ export default function Create () {
 
     const handleUrlChange = (event)=> {
         setFormState({...formState, url: event.target.value});
+    }
+
+    const handleNewTabChange = (event)=> {
+        setFormState({...formState, newTab: event.target.value});
     }
 
     const handleTitleTranslation = (event) => {
@@ -333,7 +341,16 @@ export default function Create () {
                                                         <input onChange={handleButtonTextChange} value={formState?.supportLanguage?.find(item=> item?.lang === selectedLanguage)?.buttonText || ""} type="text" name="name" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id={`button_${selectedLanguage}`} />
                                                     </div>
 
-                                                    
+                                                    <div className="my-2">
+                                                        <label htmlFor="newTab" className="text-sm sm:text-md font-bold">New Tab Allow</label>
+                                                        <select onChange={handleNewTabChange} value={formState?.newTab} className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="level" name="newTab">
+                                                            <option value={true}>Yes</option>
+                                                            <option value={false}>No</option>
+                                                        </select>
+                                                        {formError?.newTab && (
+                                                            <p className="bg-red-100 text-left font-medium">{formError?.newTab}</p>
+                                                        )}
+                                                    </div>
                                                
                                                
                                                     <div className="my-2">

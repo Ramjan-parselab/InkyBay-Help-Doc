@@ -72,7 +72,7 @@ function mailBody({mailData}) {
  * @param mailData The mailData is the  dynamic data those data want to see in  the mail.This mailData accept object data which format is like {name: 'a', email: 'abc.com'}
  */
 export default async function sendMail({toMail=null, subject=null, attachments=null, mailData=""}){
-    if(process.env.ALLOW_SEND_MAIL != "YES"){
+    if(process.env.INKYBAY_ALLOW_SEND_MAIL != "YES"){
         return {
             success: 200,
             message: `Mail currently is not allowed`
@@ -81,16 +81,16 @@ export default async function sendMail({toMail=null, subject=null, attachments=n
     if(toMail && subject){
         try {
             const transporter = nodemailer.createTransport({
-                host: process.env.MAIL_HOST,
-                port: process.env.MAIL_PORT,
-                secure: process.env.MAIL_PORT == 465 ? true : false, // true for 465, false for other por
+                host: process.env.INKYBAY_MAIL_HOST,
+                port: process.env.INKYBAY_MAIL_PORT,
+                secure: process.env.INKYBAY_MAIL_PORT == 465 ? true : false, // true for 465, false for other por
                 auth: {
-                    user: process.env.MAIL_USER,
-                    pass: process.env.MAIL_PASSWORD,
+                    user: process.env.INKYBAY_MAIL_USER,
+                    pass: process.env.INKYBAY_MAIL_PASSWORD,
                 },
             });
             const mailOptions = {
-                from: process.env.MAIL_USER,
+                from: process.env.INKYBAY_MAIL_USER,
                 to: toMail,
                 subject: subject,
                 // attachments:[

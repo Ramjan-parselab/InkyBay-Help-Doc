@@ -32,6 +32,7 @@ export default function Support({supportData}) {
                                             text = {support?.supportLanguage?.[0]?.description}
                                             icon={<img src="/images/support/youtube.svg" alt="" className="h-6 w-6 text-[#344054]" />}
                                             url={support?.url}
+                                            newTab={support?.newTab}
                                             buttonText={support?.supportLanguage?.[0]?.buttonText}
                                             variant="support"
                                         />

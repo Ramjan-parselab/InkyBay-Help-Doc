@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { ArrowRight } from "lucide-react";
 
-export default function Card({title, icon, text, buttonText, url= null , variant= null}){
+export default function Card({title, icon, text, buttonText, url= null , variant= null, newTab=false}){
     return (
         <>
         {variant == "support" ? (
@@ -13,19 +13,34 @@ export default function Card({title, icon, text, buttonText, url= null , variant
                 }
                 <div className="flex gap-4 flex-col items-start">
                     <p className="p1 text-[#1A1A1A]">
-                        <Link to={url}>
-                            {title}
-                        </Link>
+                        {newTab ? (
+                            <Link to={url} target="_blank" rel="noopener noreferrer">
+                                {title}
+                            </Link>
+                        ) : (
+                            <Link to={url} >
+                                {title}
+                            </Link>
+                        )}
+                        
                     </p>
                     <p className="text-[#667085]">{text}</p>
                 </div>
 
                 <div>
                     <p className="bold2">
-                        <Link to={url} className="flex gap-[6px] items-center text-[#476DF2] hover:underline">
+                        {newTab ? (
+                            <Link to={url} target="_blank" rel="noopener noreferrer" className="flex gap-[6px] items-center text-[#476DF2] hover:underline">
                             {buttonText}
                             <ArrowRight className="h-4 w-4" />
                         </Link>
+                        ) : (
+                            <Link to={url} className="flex gap-[6px] items-center text-[#476DF2] hover:underline">
+                            {buttonText}
+                            <ArrowRight className="h-4 w-4" />
+                        </Link>
+                        )}
+                        
                     </p>
                 </div>
                 

@@ -57,7 +57,6 @@ export const action = async ({request}) => {
                 OR: 
                 [
                     { slug: slug }, 
-                    { categoryId : categoryId }
                 ],
             }
         });

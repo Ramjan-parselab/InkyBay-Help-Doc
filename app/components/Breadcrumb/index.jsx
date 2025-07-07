@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useLang } from "../../context/LangContext";
 import SearchResult from "../Hero/SearchResult";
 
-export default function Breadcrumb({selectedCategory}) {
+export default function Breadcrumb({selectedCategory, activePage="" , showSearchBar=true}) {
   const { t } = useTranslation() || {};
   const submit = useSubmit();
   const actionData = useActionData();
@@ -96,10 +96,10 @@ export default function Breadcrumb({selectedCategory}) {
                     {selectedCategory?.categoryLanguage?.[0]?.name}
                   </Link>
 
-                  <Link to={`/${selectedLanguage}/${selectedCategory?.slug}`} 
+                  {/* <Link to={`/${selectedLanguage}/${selectedCategory?.slug}`} 
                   className={`breadcrum_text flex xl:hidden`}>
                     ...
-                  </Link>
+                  </Link> */}
 
                   </>)}
 
@@ -125,11 +125,13 @@ export default function Breadcrumb({selectedCategory}) {
                        className={`breadcrum_text hidden xl:flex text-[#1a1a1a] ${selectedCategory?.subCategory?.[0]?.docs?.length > 0 ? ("text-[#98A2B3]"):("text-[#1a1a1a]")}`}
                        
                        >{selectedCategory?.subCategory?.[0]?.categoryLanguage?.[0]?.name}</Link>
-                      <Link to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}`}
+
+
+                      {/* <Link to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}`}
 
                        className={`breadcrum_text flex xl:hidden`}
                        
-                       >...</Link>
+                       >...</Link> */}
                    </>
                 )}
 
@@ -154,10 +156,15 @@ export default function Breadcrumb({selectedCategory}) {
                        >{selectedCategory?.subCategory?.[0]?.docs?.[0]?.docsLanguage?.[0]?.title}</span>
                   </>
                 )}
+
+                {activePage != "" && (
+                  <span  className="breadcrum_text text-[#1a1a1a]">{ activePage }</span>
+                )}
               
               </div>
-
+            
             {/* ---Desktop bar breadcrum_box search bar---- */}
+            {showSearchBar && (
               <div className="hidden md:flex search_bar_box">
                 <div className="breadcrum_search_bar focus-within:border-[#FFD700] cursor-text" onClick={handleInputClick}>
                     <div className="flex w-full h-full relative">
@@ -187,7 +194,7 @@ export default function Breadcrumb({selectedCategory}) {
 
                   </div>
               </div>
-
+            )}
 
 
 
@@ -321,16 +328,21 @@ export default function Breadcrumb({selectedCategory}) {
                       <span className="breadcrum_text text-[#1a1a1a]">{selectedCategory?.subCategory?.[0]?.docs?.[0]?.docsLanguage?.[0]?.title}</span>
                   </>
                 )}
+
+                {activePage != "" && (
+                  <span  className="breadcrum_text text-[#1a1a1a]">{ activePage }</span>
+                )}
               
               </div>
-
-              <button className="flex md:hidden search_bar_box_mobile" onClick={()=>setSearchOpen(!searchOpen)}>
-                <div className="breadcrum_search_icon_mobile  hover:bg-[#F8F8F8]">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M17.5 17.5L14.5834 14.5833M16.6667 9.58333C16.6667 13.4954 13.4954 16.6667 9.58333 16.6667C5.67132 16.6667 2.5 13.4954 2.5 9.58333C2.5 5.67132 5.67132 2.5 9.58333 2.5C13.4954 2.5 16.6667 5.67132 16.6667 9.58333Z" stroke="#667085" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              </button>
+               {showSearchBar && (
+                <button className="flex md:hidden search_bar_box_mobile" onClick={()=>setSearchOpen(!searchOpen)}>
+                  <div className="breadcrum_search_icon_mobile  hover:bg-[#F8F8F8]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M17.5 17.5L14.5834 14.5833M16.6667 9.58333C16.6667 13.4954 13.4954 16.6667 9.58333 16.6667C5.67132 16.6667 2.5 13.4954 2.5 9.58333C2.5 5.67132 5.67132 2.5 9.58333 2.5C13.4954 2.5 16.6667 5.67132 16.6667 9.58333Z" stroke="#667085" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </button>
+              )}
               
               </>)}
             

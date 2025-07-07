@@ -223,7 +223,7 @@ export default function TicketForm() {
                                     onClick={submitForm}
                                     disabled={buttonLoader ? true : false}
                                     type="button"
-                                    className="w-full text-[#1a1a1a] flex items-center  justify-center px-4 py-2 bg-[#ffd700] hover:bg-[#ffd700]/90 text-xl font-medium rounded-md transition-colors shadow-md"
+                                    className="w-full text-[#fff]  flex items-center  justify-center px-4 py-2 bg-[linear-gradient(45deg,_#F58220_5.77%,_#D42427_58.77%)] hover:bg-[#ffd700]/90 text-xl font-medium rounded-md transition-colors shadow-md"
                                 >
                                 {buttonLoader ?  t("loading") : t("send_ticket") }
                                     {/* <ArrowRight  className="h-6 w-6 ml-4"/> */}

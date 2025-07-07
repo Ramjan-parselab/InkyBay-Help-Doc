@@ -156,7 +156,7 @@ export default function Sidebar({ categoryData, selectedCategory }) {
                                                                         to={`/${selectedLanguage}/${category?.slug}/${singleSubCategory?.slug}/${singleDoc?.slug}`}
                                                                     >
                                                                         <div className={`help_doc_item h-full w-full cursor-pointer hover:bg-[#F5F5F5] ${
-                                                                            singleDoc?.slug === selectedCategory?.subCategory?.[0]?.docs?.[0]?.slug 
+                                                                            singleDoc?.slug === params?.slug 
                                                                                 ? "bg-gray-100" 
                                                                                 : ""
                                                                         }`}>
@@ -343,7 +343,7 @@ export default function Sidebar({ categoryData, selectedCategory }) {
                                                                 {singleSubCategory?.docs?.map((singleDoc) => (
                                                                     <div 
                                                                         className={`help_doc_item cursor-pointer hover:bg-[#F5F5F5] ${
-                                                                            singleDoc?.slug === selectedCategory?.subCategory?.[0]?.docs?.[0]?.slug 
+                                                                            singleDoc?.slug === params?.slug
                                                                                 ? "bg-gray-100" 
                                                                                 : ""
                                                                         }`} 

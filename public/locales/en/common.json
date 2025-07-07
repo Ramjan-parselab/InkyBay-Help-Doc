@@ -1,4 +1,6 @@
 {
+    "doc": "Doc",
+    "docs": "Docs",
     "home": "Home",
     "articles": "{{number}} Articles",
     "name": "Name",
@@ -14,10 +16,17 @@
     "previous_article": "Previous article",
     "next_article": "Next article",
     "related_articles": "RELATED ARTICLES",
-
+    "help_doc_articles": "Help doc articles",
+    "docs_description": "Get answers, guides, and tips to manage and use the InkyBay product customization platform.",
+    "ticket": "Ticket",
+    "tickets": "Tickets",
     "required_field": "{{field}}  is required",
     "please_insert_valid_email" : "Please insert valid email",
     "please_enter_your": "Please enter your {{title}}",
+
+    "privacy": "Privacy",
+    "terms_of_service": "Terms of Service",
+    "privacy_policy": "Privacy policy",
 
     "featured_articles" : "Featured Articles",
     "quick_access_to_essential_guides": "Quick access to essential guides and get help instantly.",
@@ -25,6 +34,7 @@
     "welcome": "Welcome to InkyBay Help Center",
     "how_can_help": "Hello! 👋 how can we help you with?",
     "popular_search": "Popular searches",
+    "see_all": "See all",
     "result_not_found": "Result not  found",
     "no_result_found": "No result found",
     "result_found": "result found",

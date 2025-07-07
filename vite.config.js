@@ -22,6 +22,9 @@ export default defineConfig({
                     route("", "routes/$lang.home.jsx", {index: true});
                     route("ticket", "routes/$lang.ticket.jsx");
                     route("docs/:slug", "routes/$lang.$slug.docDetails.jsx");
+                    route("docs", "routes/$lang.docs.jsx");
+                    route("privacy", "routes/$lang.privacy.jsx");
+                    route("terms", "routes/$lang.terms.jsx");
                 });
                 
                 // Categories routes
@@ -31,9 +34,13 @@ export default defineConfig({
                     route(":category/:subcategory/:slug", "routes/category/$lang.$category.$subcategory.$slug.document.jsx");
                 });
 
-                
 
-                
+                  route("sitemap.xml", "routes/sitemap/_index.jsx");
+                  route("sitemap", "routes/sitemap/sitemap.jsx", ()=> {
+                        route("main.xml", "routes/sitemap/main.jsx");
+                        route("docs.xml", "routes/sitemap/docs.jsx");
+                  })
+
                 // Admin routes
                 route("/admin", "routes/admin/auth/auth.jsx", ()=>{
                     route("login", "routes/admin/auth/login.jsx", {index: true});

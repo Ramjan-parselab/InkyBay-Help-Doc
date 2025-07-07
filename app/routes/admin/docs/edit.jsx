@@ -80,8 +80,7 @@ export const action = async ({request}) => {
             where: {
                 OR: 
                 [
-                    { slug: slug }, 
-                    { categoryId : categoryId }
+                    { slug: slug },
                 ],
                 NOT:{
                     id: parseInt(id)

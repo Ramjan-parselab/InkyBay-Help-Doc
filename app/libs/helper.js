@@ -75,11 +75,14 @@ export const validatePhone = (phone) => {
  * @returns {Array} An array of meta tag objects, each containing a `name` or `property` and `content`.
  */
 export const setMetaTag = (siteName="JewelsLab Help Center", title=null, metaTitle=null, metaDescription=null, metaType = "website" ) => {
-    const siteUrl   = `https://beta.docs.jewelslab.com`;
+    const siteUrl   = `https://beta.docs.inkybay.com`;
     const metaData = [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
         { title: title ?  `${title} | ${siteName}` : `${siteName}`},
         { name:"charset", content:"utf-8"},
         { name: 'description', content: metaDescription },
+        { name: "robots", content: "index, follow" },
         { property: 'og:locale', content: "en_US" },
         { property: 'og:type', content: metaType },
         { property: 'og:title', content: metaTitle },

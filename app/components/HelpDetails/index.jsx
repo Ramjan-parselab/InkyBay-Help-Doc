@@ -137,7 +137,7 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
 
                     <div className="pagiantion_sections">
                         <div className="pagiantion_section">
-                            {previousPageData  && previousPageData?.subCategory?.length > 0 &&(
+                            {previousPageData  && previousPageData?.subCategory[0]?.docs?.length > 0 &&(
                                 <>
                                   <Link 
                                   // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${previousPageData?.slug}`} 
@@ -159,7 +159,7 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
                         </div>
 
                         <div className="pagiantion_section">
-                            {nexPageData && nexPageData?.subCategory?.length > 0 && (
+                            {nexPageData && nexPageData?.subCategory[0]?.docs?.length > 0 && (
                               <>
                                   <Link 
                                   // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${nexPageData?.slug}`} 
