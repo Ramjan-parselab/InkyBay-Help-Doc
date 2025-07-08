@@ -219,7 +219,9 @@ export default function Cotagory () {
                                         docs?.map((doc)=> (
                                             <tr className="hover:bg-slate-50" key={doc?.id}>
                                                 <td className="p-4 border-b border-slate-200 py-5">
-                                                    <p className="block font-semibold text-sm text-slate-800">{doc?.title}</p>
+                                                    <Link to={`/admin/docs/${doc?.id}`}>
+                                                        <p className="block font-semibold text-sm text-slate-800">{doc?.title}</p>
+                                                    </Link>
                                                 </td>
                                                 <td className="p-4 border-b border-slate-200 py-5">
                                                     <p className="text-sm text-slate-500">{doc?.slug}</p>

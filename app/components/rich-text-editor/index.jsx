@@ -6,6 +6,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./menu-bar";
 import { useEffect } from "react";
+import Youtube from "@tiptap/extension-youtube";
 
 export default function RichTextEditor({ content, onChange }) {
   const editor = useEditor({
@@ -40,6 +41,10 @@ export default function RichTextEditor({ content, onChange }) {
         HTMLAttributes: {
           class: "text-blue-600 underline hover:text-blue-800",
         },
+      }),
+      Youtube.configure({
+        controls: true,
+        nocookie: true,
       }),
       // Code, // Inline code support
     ],

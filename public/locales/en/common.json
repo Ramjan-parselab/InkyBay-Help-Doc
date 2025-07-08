@@ -23,6 +23,7 @@
     "required_field": "{{field}}  is required",
     "please_insert_valid_email" : "Please insert valid email",
     "please_enter_your": "Please enter your {{title}}",
+    "to_read": "to read",
 
     "privacy": "Privacy",
     "terms_of_service": "Terms of Service",

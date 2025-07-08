@@ -1,5 +1,5 @@
 import { AlignCenter, AlignLeft, AlignRight, Bold, Code as CodeIcon, Heading1, Heading2, Heading3, Highlighter, Image as ImageIcon, Italic, Link as LinkIcon, 
-List,ListOrdered,Pilcrow, Strikethrough, Unlink, XCircle } from "lucide-react";
+List,ListOrdered,Pilcrow, Strikethrough, Unlink, VideoIcon, XCircle } from "lucide-react";
 import { useCallback } from "react";
 import { Toggle } from "../ui/toggle";
 
@@ -52,6 +52,18 @@ export default function MenuBar({ editor }) {
   const removeImage = useCallback(() => {
     editor.chain().focus().deleteSelection().run();
   }, [editor]);
+
+  const addYoutubeVideo = () => {
+    const url = prompt("Enter YouTube video URL");
+
+    if (url) {
+      editor.commands.setYoutubeVideo({
+        src: url,
+        width: Math.max(320, parseInt(200, 10)) || 640,
+        height: Math.max(180, parseInt(100, 10)) || 480,
+      });
+    }
+  };
 
   const Options = [
     {
@@ -167,6 +179,12 @@ export default function MenuBar({ editor }) {
       onClick: removeImage,
       preesed: false,
       label: "Remove Image",
+    },
+    {
+      icon: <VideoIcon className="size-4" />,
+      onClick: addYoutubeVideo,
+      preesed: false,
+      label: "Add YouTube Video",
     },
   ];
 

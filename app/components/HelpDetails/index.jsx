@@ -81,7 +81,7 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
                                     <path d="M10.4734 10.12L8.40675 8.88671C8.04675 8.67338 7.75342 8.16005 7.75342 7.74005V5.00671" stroke="#667085" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
                                 </i>
-                                <span className="span1 text-[#667085] text-center"><TotalReadingTime /> to read</span>
+                                <span className="span1 text-[#667085] text-center"><TotalReadingTime /> {t("to_read")}</span>
                               </button>
 
                               <div className="last_update">
