@@ -63,6 +63,9 @@ export const loader = async({request, params}) => {
                             lang: selectedLanguage
                         }
                     },
+                },
+                where:{
+                    status: "ACTIVE",
                 }
             },
             categoryLanguage:{

@@ -81,7 +81,7 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
                                     <path d="M10.4734 10.12L8.40675 8.88671C8.04675 8.67338 7.75342 8.16005 7.75342 7.74005V5.00671" stroke="#667085" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
                                 </i>
-                                <span className="span1 text-[#667085] text-center"><TotalReadingTime /> {t("to_read")}</span>
+                                <span className="span1 text-[#667085] text-center"><TotalReadingTime /> {t('to_read')}</span>
                               </button>
 
                               <div className="last_update">
@@ -137,7 +137,7 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
 
                     <div className="pagiantion_sections">
                         <div className="pagiantion_section">
-                            {previousPageData  && previousPageData?.subCategory[0]?.docs?.length > 0 &&(
+                            {previousPageData  && previousPageData?.subCategory?.[0]?.docs?.length > 0 ? (
                                 <>
                                   <Link 
                                   // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${previousPageData?.slug}`} 
@@ -155,11 +155,49 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
 
                                   <p className="text-left p1 bold3 text-[#16171A]">{previousPageData?.subCategory?.[0]?.docs?.[0]?.docsLanguage?.[0]?.title}</p>
                                 </>
+                            ): previousPageData && previousPageData?.category?.category?.id ?(
+                              <>
+                                  <Link 
+                                  // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${nexPageData?.slug}`} 
+                                  to={
+                                      `/${selectedLanguage}/${previousPageData?.category?.category?.slug}/${previousPageData?.category?.slug}/${previousPageData?.slug}`
+                                  } 
+                                  className="pagination_button">
+                                      <p className="text-[#475467]">
+                                         {t("previous_article")}
+                                      </p>
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                                        <path d="M19.0002 6.36869L0.333496 6.36873M19.0002 6.36869L13.1669 12.2021M19.0002 6.36869L13.1668 0.5354" stroke="#475467"/>
+                                      </svg>
+                                  </Link>
+
+                                    <p className="p1 bold3 text-right text-[#16171A]">{previousPageData?.docsLanguage?.[0]?.title}</p>
+                              </>
+                            ) : previousPageData?.title  &&(
+                              <>
+                                <Link 
+                                  // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${nexPageData?.slug}`} 
+                                  to={
+                                      `/${selectedLanguage}/docs/${previousPageData?.slug}`
+                                  } 
+                                  className="pagination_button">
+                                      <p className="text-[#475467]">
+                                         {t("previous_article")}
+                                      </p>
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                                        <path d="M19.0002 6.36869L0.333496 6.36873M19.0002 6.36869L13.1669 12.2021M19.0002 6.36869L13.1668 0.5354" stroke="#475467"/>
+                                      </svg>
+                                  </Link>
+
+                                    <p className="p1 bold3 text-right text-[#16171A]">{previousPageData?.docsLanguage?.[0]?.title}</p>
+                              </>
                             )} 
                         </div>
 
                         <div className="pagiantion_section">
-                            {nexPageData && nexPageData?.subCategory[0]?.docs?.length > 0 && (
+                            {nexPageData && nexPageData?.subCategory?.[0]?.docs?.length > 0 ? (
                               <>
                                   <Link 
                                   // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${nexPageData?.slug}`} 
@@ -177,6 +215,44 @@ export default function HelpDetails({helpDocDetails, RelatedArticlesData, select
                                   </Link>
 
                                     <p className="p1 bold3 text-right text-[#16171A]">{nexPageData?.subCategory?.[0]?.docs?.[0]?.docsLanguage?.[0]?.title}</p>
+                              </>
+                            ): nexPageData && nexPageData?.category?.category?.id ?(
+                              <>
+                                  <Link 
+                                  // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${nexPageData?.slug}`} 
+                                  to={
+                                      `/${selectedLanguage}/${nexPageData?.category?.category?.slug}/${nexPageData?.category?.slug}/${nexPageData?.slug}`
+                                  } 
+                                  className="pagination_button">
+                                      <p className="text-[#475467]">
+                                        {t("next_article")}
+                                      </p>
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                                        <path d="M19.0002 6.36869L0.333496 6.36873M19.0002 6.36869L13.1669 12.2021M19.0002 6.36869L13.1668 0.5354" stroke="#475467"/>
+                                      </svg>
+                                  </Link>
+
+                                    <p className="p1 bold3 text-right text-[#16171A]">{nexPageData?.docsLanguage?.[0]?.title}</p>
+                              </>
+                            ) : nexPageData?.title  &&(
+                              <>
+                                <Link 
+                                  // to={`/${selectedLanguage}/${selectedCategory?.slug}/${selectedCategory?.subCategory?.[0]?.slug}/${nexPageData?.slug}`} 
+                                  to={
+                                      `/${selectedLanguage}/docs/${nexPageData?.slug}`
+                                  } 
+                                  className="pagination_button">
+                                      <p className="text-[#475467]">
+                                        {t("next_article")}
+                                      </p>
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                                        <path d="M19.0002 6.36869L0.333496 6.36873M19.0002 6.36869L13.1669 12.2021M19.0002 6.36869L13.1668 0.5354" stroke="#475467"/>
+                                      </svg>
+                                  </Link>
+
+                                    <p className="p1 bold3 text-right text-[#16171A]">{nexPageData?.docsLanguage?.[0]?.title}</p>
                               </>
                             )}
                             

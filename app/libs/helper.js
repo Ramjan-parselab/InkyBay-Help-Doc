@@ -71,36 +71,44 @@ export const validatePhone = (phone) => {
  * @param {String} title - The title displayed in the browser tab.
  * @param {String} metaTitle - The title used for meta tags (e.g., Open Graph, Twitter, Pinterest).
  * @param {String} metaDescription - A brief description of the content, used in meta tags.
+ * @param {String} metaImage - The URL of the image used in meta tags (e.g., Open Graph, Twitter).
  * @param {String} metaType - The type of content (default: "website"). Common types include "article" or "website".
  * @returns {Array} An array of meta tag objects, each containing a `name` or `property` and `content`.
  */
-export const setMetaTag = (siteName="JewelsLab Help Center", title=null, metaTitle=null, metaDescription=null, metaType = "website" ) => {
-    const siteUrl   = `https://docs.inkybay.com`;
+export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImage=null, metaDescription=null, metaType = "article", urlParams=''} ) => {
+    const siteUrl   = `https://docs.inkybay.com${urlParams}`;
     const metaData = [
-        { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: title ?  `${title} | ${siteName}` : `${siteName}`},
-        { name:"charset", content:"utf-8"},
+        { title: `${title}`},
         { name: 'description', content: metaDescription },
-        { name: "robots", content: "index, follow" },
+        { name: "robots", content: "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large " },
         { property: 'og:locale', content: "en_US" },
         { property: 'og:type', content: metaType },
-        { property: 'og:title', content: metaTitle },
+        { property: 'og:title', content: title },
         { property: 'og:description', content: metaDescription },
         { property: 'og:url', content: siteUrl },
         { tagName: "link", rel: "canonical", href: siteUrl },
         { property: 'og:site_name', content: siteName },
+        { property: 'og:image:width', content: "1200" },
+        { property: 'og:image:height', content: "630" },
+        { property: 'og:image:alt', content: title },
+        { property: 'og:image:type', content: "image/png" },
         
         // Twitter Card Meta Tags
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: metaTitle },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:creator', content: '@inkybay' },
         { name: 'twitter:description', content: metaDescription },
+        { name: 'twitter:url', content: siteUrl },
+        { name: 'twitter:image', content: metaImage },
+        { name: 'twitter:image:width', content: "800"},
+        { name: 'twitter:image:height', content: "600" },
         { name: 'twitter:url', content: siteUrl },
 
         // Pinterest Meta Tags
         { name: 'pinterest:rich_pin', content: 'true' },
-        { name: 'pinterest:title', content: metaTitle },
+        { name: 'pinterest:title', content: title },
         { name: 'pinterest:description', content: metaDescription },
+        { name: 'pinterest:image', content: metaImage },
     ];
     return metaData;
 }

@@ -6,6 +6,21 @@ import { getSession } from "../services/session.server";
 import Documents from "../components/Documents";
 import { setMetaTag } from "../libs/helper";
 import { useTranslation } from "react-i18next";
+import defaultlogo from "/images/logo/logo.svg";
+
+
+export const meta = ({ params }) => {
+    const title = "Inkybay Knowledgebase - Product Customization Software for Print Shops";
+    const metaDescription = `Welcome to the JewelsLab Help Center — your one-stop support hub for all things jewelry customization! 
+                            Whether you have questions about your order, need help using our design tools, or want to report an issue,
+                            we're here to help.`
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/docs`;
+    
+    // Set meta tag if null please set value null
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
+    return metaData;
+}
 
 export const loader = async({request, params}) => {
     // If in url not found language then language code get from cookie and
@@ -57,20 +72,6 @@ export const loader = async({request, params}) => {
             selectedLanguage: selectedLanguage
         }
     }
-}
-
-export const meta =   () => {
-    const siteName = "JewelsLab Help Center";
-    const title = "docs";
-    const metaTitle = `JewelsLab Help Center`;
-    const metaDescription = `"Welcome to the JewelsLab Help Center — your one-stop support hub for all things jewelry customization! 
-                            Whether you have questions about your order, need help using our design tools, or want to report an issue,
-                            we're here to help."`;
-    const metaType = "website";
-    
-    // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
-    return metaData;
 }
 
 export const action = async({request, params})=> {

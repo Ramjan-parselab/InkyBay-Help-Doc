@@ -3,22 +3,8 @@ import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import prisma from "../db.server";
-import { setMetaTag } from "../libs/helper";
 import { commitSession, getSession } from "../services/session.server";
-
-export const meta =   () => {
-    const siteName = "InkyBay Help Center";
-    const title = "";
-    const metaTitle = `InkyBay Help Center`;
-    const metaDescription = `"Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
-                            Whether you have questions about your order, need help using our design tools, or want to report an issue,
-                            we're here to help."`;
-    const metaType = "website";
-    
-    // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
-    return metaData;
-}
+import PageLoader from "../components/PageLoader";
 
 
 export const loader = async({request, params}) => {
@@ -131,6 +117,7 @@ export default function Index() {
   const [footerMenuData, SetFooterMenuData] = useState([]);
   const [socialMediaData, SetSocialMediaData] = useState([]);
   const [logoData, setlogoData] = useState([]);
+  const [pageLoader, setPageLoader] = useState(true);
 
 
   const submit = useSubmit();
@@ -150,17 +137,24 @@ export default function Index() {
       const logoInfo = loaderData?.data?.settings?.fieldValue ? JSON.parse(loaderData?.data?.settings?.fieldValue) : 0
       
       setlogoData(logoInfo);
+      setPageLoader(false);
     }
 },[loaderData]);
 
 
   return (
     <>
-       <Header logoData={logoData} languages={languageData} handleSubmit={handleSubmit}/>
-       <main className="w-full -mt-[2px] border-t-2 border-[#000]"> 
-          <Outlet />
-       </main>
-       <Footer footerMenuData={footerMenuData} socialMediaData={socialMediaData}/>
+        {pageLoader ? (
+            <PageLoader />
+        ) : (
+            <> 
+                <Header logoData={logoData} languages={languageData} handleSubmit={handleSubmit}/>
+                <main className="w-full -mt-[2px] border-t-2 border-[#000]"> 
+                <Outlet />
+                </main>
+                <Footer footerMenuData={footerMenuData} socialMediaData={socialMediaData}/>
+            </>
+        )}
     </>
   );
 }

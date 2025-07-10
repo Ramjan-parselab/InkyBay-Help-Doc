@@ -93,7 +93,7 @@ export const action = async ({request}) => {
         const serial = formData.get("serial");
         const parentCategory = formData.get("parentCategory") || null;
         const status = formData.get("status") || "";
-        const uploadDir = `/images/categories/${icon?.name}`;
+        const uploadDir = icon?.name ? `/images/categories/${icon?.name}` : null;
         let categoryLanguage = JSON.parse(formData.get("categoryLanguage")) || [];
 
         

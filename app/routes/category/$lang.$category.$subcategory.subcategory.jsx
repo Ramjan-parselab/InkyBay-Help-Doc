@@ -4,15 +4,19 @@ import Breadcrumb from "../../components/Breadcrumb";
 import SubCategoryContent from "../../components/SubCategoryContent";
 import prisma from "../../db.server";
 import { getSession } from "../../services/session.server";
+import { setMetaTag } from "../../libs/helper";
+import defaultlogo from "/images/logo/logo.svg";
 
-export const meta =   ({ data }) => {
-    const title = data?.data?.selectedCategory ? data?.data?.selectedCategory?.subCategory?.[0]?.categoryLanguage?.[0]?.name : "JewelsLab";
-    const description = data?.data?.selectedCategory ? data?.data?.selectedCategory?.categoryLanguage?.[0]?.description : " JewelsLab Help Center";
 
-     return ([
-         { title: `${title} |  JewelsLab Help Center` },
-         { name: "description",  content: description,  },
-     ]);
+export const meta = ({ data, params }) => {
+    const title = data?.data?.subcategoryContent?.length > 0 ? `${data?.data?.subcategoryContent?.[0]?.name} - Product Customization Software for Print Shops` : "InkyBay Help Center";
+    const metaDescription =  "";
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/${params?.category}/${params?.subcategory}`;
+
+    // Set meta tag if null please set value null
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
+    return metaData;
 }
 
 export const loader = async ({request, params})=> {

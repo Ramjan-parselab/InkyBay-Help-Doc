@@ -7,16 +7,16 @@ import Sidebar from "../components/SideBar";
 import prisma from "../db.server";
 import { setMetaTag } from "../libs/helper";
 import { getSession } from "../services/session.server";
+import defaultlogo from "/images/logo/logo.svg";
 
-export const meta =   ({ data }) => {
-    const siteName = "InkyBay Help Center";
-    const title = data?.data?.helpDocDetails ? data?.data?.helpDocDetails?.docsLanguage?.[0]?.title : "InkyBay Help Center";
-    const metaTitle = `InkyBay Help Center`;
-    const metaDescription = data?.data?.helpDocDetails ? data?.data?.helpDocDetails?.docsLanguage?.[0]?.shortDescription : "InkyBay Help Center description";
-    const metaType = "website";
-    
+export const meta = ({ data, params }) => {
+    const title = data?.data?.helpDocDetails ? `${data?.data?.helpDocDetails?.docsLanguage?.[0]?.title} - Product Customization Software for Print Shops` : "InkyBay Help Center";
+    const metaDescription = data?.data?.helpDocDetails ? data?.data?.helpDocDetails?.docsLanguage?.[0]?.shortDescription : "";
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/docs/${params?.slug}`;
+
     // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
     return metaData;
 }
 
@@ -117,6 +117,9 @@ export const loader = async ({request, params})=> {
                            lang: selectedLanguage
                         }
                     },
+                },
+                where:{
+                    status: "ACTIVE",
                 }
             },
             categoryLanguage:{
@@ -211,11 +214,15 @@ export const loader = async ({request, params})=> {
         }
     });
 
+
     return {
         data: {
             categories: categories,
             helpDocDetails: helpDocDetails,
-            selectedLanguage: selectedLanguage
+            selectedLanguage: selectedLanguage,
+            nexPageData: nexPageData,
+            previousData: previousData,
+            
         }
     }
 }
@@ -317,7 +324,9 @@ export default function DocDetails() {
     const actionData = useActionData();
     const [categoryData, setCategoryData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [helpDocDetails, setHelpDocDetails] = useState([]);    
+    const [helpDocDetails, setHelpDocDetails] = useState([]);
+    const [nexPageData, setNextPageData] = useState("");
+    const [previousPageData, setPreviousPageData] = useState("");         
 
     useEffect(()=> {
         if(loaderData){
@@ -326,6 +335,8 @@ export default function DocDetails() {
             if(loaderData?.data?.helpDocDetails){
                 setHelpDocDetails(loaderData?.data?.helpDocDetails);
             }
+            setNextPageData(loaderData?.data?.nexPageData);
+            setPreviousPageData(loaderData?.data?.previousData);
         }
     }, [loaderData]);
 
@@ -339,6 +350,7 @@ export default function DocDetails() {
             }
         }
     },[actionData]);
+
     
     return (
         <>
@@ -350,7 +362,9 @@ export default function DocDetails() {
                         <HelpDetails 
                             helpDocDetails={helpDocDetails} 
                             RelatedArticlesData={[]} 
-                            selectedCategory={selectedCategory} 
+                            selectedCategory={selectedCategory}
+                            nexPageData={nexPageData}
+                            previousPageData={previousPageData}     
                         />
                     </main>
             </div>

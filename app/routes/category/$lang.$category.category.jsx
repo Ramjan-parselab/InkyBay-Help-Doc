@@ -5,16 +5,17 @@ import CategoryContent from "../../components/CategoryContent";
 import prisma from "../../db.server";
 import { setMetaTag } from "../../libs/helper";
 import { getSession } from "../../services/session.server";
+import defaultlogo from "/images/logo/logo.svg";
 
-export const meta =   ({ data }) => {
-    const siteName = "InkyBay Help Center";
-    const title = data?.data?.selectedCategory ? data?.data?.selectedCategory?.categoryLanguage?.[0]?.name : " InkyBay Help Center";
-    const metaTitle = `InkyBay Help Center`;
-    const metaDescription = data?.data?.selectedCategory ? data?.data?.selectedCategory?.categoryLanguage?.[0]?.description : " InkyBay Help Center";
-    const metaType = "website";
-    
+
+export const meta = ({ data, params }) => {
+    const title = data?.data?.categoryContent?.length > 0 ? `${data?.data?.categoryContent?.[0]?.name} - Product Customization Software for Print Shops` : "InkyBay Help Center";
+    const metaDescription =  "";
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/${params?.category}`;
+
     // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
     return metaData;
 }
 

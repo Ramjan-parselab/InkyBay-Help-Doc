@@ -5,16 +5,19 @@ import Breadcrumb from "../../components/Breadcrumb";
 import HelpDetails from "../../components/HelpDetails";
 import prisma from "../../db.server";
 import { getSession } from "../../services/session.server";
+import defaultlogo from "/images/logo/logo.svg";
+import { setMetaTag } from "../../libs/helper";
 
 
-export const meta =   ({ data }) => {
-    const title = data?.data?.selectedCategory ? data?.data?.selectedCategory?.subCategory?.[0]?.docs?.[0]?.docsLanguage?.[0]?.title : "JewelsLab Help Center";
-    const description = data?.data?.helpDocDetails ? data?.data?.helpDocDetails?.docsLanguage?.[0]?.shortDescription : "JewelsLab Help Center";
+export const meta = ({ data, params }) => {
+    const title = data?.data?.helpDocDetails ? `${ data?.data?.helpDocDetails?.docsLanguage?.[0]?.title} - Product Customization Software for Print Shops` : "InkyBay Help Center";
+    const metaDescription = data?.data?.helpDocDetails ? data?.data?.helpDocDetails?.docsLanguage?.[0]?.shortDescription : "";
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/${params?.category}/${params?.subcategory}/${params.slug}`;
 
-     return ([
-         { title: `${title} | JewelsLab Help Center` },
-         { name: "description",  content: description,  },
-     ]);
+    // Set meta tag if null please set value null
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
+    return metaData;
 }
 
 export const loader = async ({request, params})=> {
@@ -228,7 +231,10 @@ export const loader = async ({request, params})=> {
                },
                where:{
                  status: "ACTIVE",
-                 slug: subcategorySlug,
+                 NOT:{
+
+                     slug: subcategorySlug,
+                 }
                }
             }
         },
@@ -237,6 +243,10 @@ export const loader = async ({request, params})=> {
             status: "ACTIVE"
         }
     })
+
+    console.log("============")
+    console.log(nexPageData)
+    console.log("============")
 
     const previousData = await prisma.categories.findFirst({
         select:{
@@ -263,7 +273,10 @@ export const loader = async ({request, params})=> {
                },
                where:{
                  status: "ACTIVE",
-                 slug: subcategorySlug,
+                 NOT:{
+
+                     slug: subcategorySlug,
+                 }
                }
             }
         },
@@ -411,7 +424,7 @@ export default function Details() {
         }
     },[actionData]);
 
-    console.log("nexPageData===", nexPageData)
+   
 
     return (
         <>

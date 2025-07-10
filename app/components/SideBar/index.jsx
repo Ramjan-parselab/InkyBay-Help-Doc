@@ -1,5 +1,5 @@
 import { Link, useParams } from "@remix-run/react";
-import { ChevronUp, MenuIcon } from "lucide-react";
+import { ChevronUp,  FoldersIcon, MenuIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLang } from "../../context/LangContext";
 
@@ -85,7 +85,7 @@ export default function Sidebar({ categoryData, selectedCategory }) {
                                                     className="w-5 h-5"
                                                 />
                                             ) : (
-                                                <MenuIcon size={20} />
+                                                <FoldersIcon size={20} />
                                             )}
                                             <p className="bold2 text-[#1A1A1A]">{category?.categoryLanguage?.[0]?.name}</p>
                                         </div>
@@ -224,7 +224,7 @@ export default function Sidebar({ categoryData, selectedCategory }) {
                                                         </div>
 
                                                         <Link 
-                                                            className={`h-full flex flex-wrap items-center py-2 ${params?.slug === item?.slug ?  'bg-gray-100' : ''}`} 
+                                                            className={`help_doc_item h-full w-full flex flex-wrap items-center py-2 ${params?.slug === item?.slug ?  'bg-gray-100' : ''}`} 
                                                             to={`/${selectedLanguage}/docs/${item?.slug}`}
                                                         >
                                                             <span className="span1 bold2 h-full flex flex-wrap items-center">
@@ -284,7 +284,7 @@ export default function Sidebar({ categoryData, selectedCategory }) {
                                                     className="w-4 h-4"
                                                 />
                                             ) : (
-                                                <MenuIcon size={16} />
+                                                <FoldersIcon size={16} />
                                             )}
                                             <p className="bold2 text-[#1A1A1A]">{category?.categoryLanguage?.[0]?.name}</p>
                                         </Link>
@@ -384,7 +384,7 @@ export default function Sidebar({ categoryData, selectedCategory }) {
 
                                                             <Link 
                                                                 to={`/${selectedLanguage}/docs/${item?.slug}`} 
-                                                                className={`h-full w-full flex ${params?.slug === item?.slug ?  'bg-gray-100' : ''}`} 
+                                                                className={`help_doc_item h-full w-full flex ${params?.slug === item?.slug ?  'bg-gray-100' : ''}`} 
 
                                                             >
                                                                 <span className="span1 bold2 py-2">

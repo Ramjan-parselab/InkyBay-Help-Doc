@@ -9,18 +9,17 @@ import Support from "../components/Support";
 import prisma from "../db.server";
 import { setMetaTag } from "../libs/helper";
 import { getSession } from "../services/session.server";
+import defaultlogo from "/images/logo/logo.svg";
 
 export const meta = () => {
-    const siteName = "InkyBay Help Center";
-    const title = "";
-    const metaTitle = `InkyBay Help Center`;
+    const title = "Inkybay Knowledgebase - Product Customization Software for Print Shops";
     const metaDescription = `"Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
                              Whether you have questions about your order, need help using our design tools, or want to report an issue,
                              we're here to help."`;
-    const metaType = "website";
+    const metaImage = defaultlogo;
     
     // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
+    const metaData = setMetaTag({title, metaImage, metaDescription});
     return metaData;
 }
 

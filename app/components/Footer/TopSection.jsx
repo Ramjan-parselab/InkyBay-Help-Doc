@@ -11,7 +11,7 @@ export default function TopSection({footerMenuData, socialMediaData}) {
         <>
            <div className="w-full flex justify-between gap-6 md:items-center items-start md:flex-row flex-col">
                 <div>
-                  <Link to="/" className="inline-block md:w-64 w-[200px]">
+                  <Link to={`https://apps.shopify.com/productsdesigner`} target="_blank" rel="noopener noreferrer" className="inline-block md:w-64 w-[200px]">
                     <img 
                       src="/images/footer/shopify-badge.svg"
                       alt="Available on Shopify App Store"

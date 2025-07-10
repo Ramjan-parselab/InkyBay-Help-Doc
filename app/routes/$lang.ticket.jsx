@@ -5,18 +5,19 @@ import sendMail from "../libs/sendMail";
 import { setMetaTag } from "../libs/helper";
 import Breadcrumb from "../components/Breadcrumb";
 import { useTranslation } from "react-i18next";
+import defaultlogo from "/images/logo/logo.svg";
 
-export const meta =   () => {
-    const siteName = "InkyBay Help Center";
-    const title = "Ticket";
-    const metaTitle = `InkyBay Help Center`;
-    const metaDescription = `"Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
+
+export const meta = ({ params }) => {
+    const title = "Ticket - Product Customization Software for Print Shops";
+    const metaDescription = `Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
                             Whether you have questions about your order, need help using our design tools, or want to report an issue,
-                            we're here to help."`;
-    const metaType = "website";
+                            we're here to help.`
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/ticket`;
     
     // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
     return metaData;
 }
 

@@ -2,22 +2,21 @@ import { useTranslation } from "react-i18next";
 import Breadcrumb from "../components/Breadcrumb";
 import { setMetaTag } from "../libs/helper";
 import Terms from "../components/termsOfService";
+import defaultlogo from "/images/logo/logo.svg";
 
-export const meta =   () => {
-    const siteName = "InkyBay Help Center";
-    const title = "Terms of service";
-    const metaTitle = `InkyBay Help Center`;
-    const metaDescription = `"Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
-                            Whether you have questions about your order, need help using our design tools, or want to report an issue,
-                            we're here to help."`;
-    const metaType = "website";
+
+export const meta = ({ params }) => {
+    const title = "InkyBay - Product Customizer - Terms of Service";
+    const metaDescription = `InkyBay - Product Customizer Software for Shopify, Terms of Service`
+    const metaImage = defaultlogo;
+    const urlParams = `/${params?.lang}/terms`;
     
     // Set meta tag if null please set value null
-    const metaData = setMetaTag(siteName, title, metaTitle, metaDescription,  metaType);
+    const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
     return metaData;
 }
 
-export default function PrivacyPage() {
+export default function TermsPage() {
     const {t} = useTranslation();
 
     return (
