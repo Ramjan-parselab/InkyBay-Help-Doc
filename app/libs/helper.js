@@ -88,6 +88,7 @@ export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImag
         { property: 'og:url', content: siteUrl },
         { tagName: "link", rel: "canonical", href: siteUrl },
         { property: 'og:site_name', content: siteName },
+        { property: 'og:image', content: `${siteUrl}/${metaImage}` },
         { property: 'og:image:width', content: "1200" },
         { property: 'og:image:height', content: "630" },
         { property: 'og:image:alt', content: title },
@@ -99,7 +100,7 @@ export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImag
         { name: 'twitter:creator', content: '@inkybay' },
         { name: 'twitter:description', content: metaDescription },
         { name: 'twitter:url', content: siteUrl },
-        { name: 'twitter:image', content: metaImage },
+        { name: 'twitter:image', content: `${siteUrl}/${metaImage}` },
         { name: 'twitter:image:width', content: "800"},
         { name: 'twitter:image:height', content: "600" },
         { name: 'twitter:url', content: siteUrl },
@@ -108,7 +109,7 @@ export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImag
         { name: 'pinterest:rich_pin', content: 'true' },
         { name: 'pinterest:title', content: title },
         { name: 'pinterest:description', content: metaDescription },
-        { name: 'pinterest:image', content: metaImage },
+        { name: 'pinterest:image', content: `${siteUrl}/${metaImage}` },
     ];
     return metaData;
 }
