@@ -5,6 +5,8 @@ import Header from "../components/Header";
 import prisma from "../db.server";
 import { commitSession, getSession } from "../services/session.server";
 import PageLoader from "../components/PageLoader";
+import defaultlogo from "/images/logo/logo.svg";
+import { setMetaTag } from "../libs/helper";
 
 
 export const loader = async({request, params}) => {
@@ -77,6 +79,18 @@ export const loader = async({request, params}) => {
         selectedLanguage: selectedLanguage
       }
   };
+}
+
+export const meta = () => {
+    const title = "Inkybay Knowledgebase - Product Customization Software for Print Shops";
+    const metaDescription = `"Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
+                             Whether you have questions about your order, need help using our design tools, or want to report an issue,
+                             we're here to help."`;
+    const metaImage = defaultlogo;
+    
+    // Set meta tag if null please set value null
+    const metaData = setMetaTag({title, metaImage, metaDescription});
+    return metaData;
 }
 
 export const action = async({request}) => {

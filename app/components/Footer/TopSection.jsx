@@ -32,7 +32,7 @@ export default function TopSection({footerMenuData, socialMediaData}) {
                               {menu?.footerMenuLanguage?.[0]?.name}
                           </Link>
                           ) : (
-                              <Link to={`/${selectedLanguage}/${menu?.url}`} className="p1 text-[#1A1A1A] hover:underline text-sm ">
+                              <Link to={menu?.url} className="p1 text-[#1A1A1A] hover:underline text-sm ">
                                 {menu?.footerMenuLanguage?.[0]?.name}
                             </Link>
                           )}

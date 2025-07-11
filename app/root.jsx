@@ -7,6 +7,8 @@ import { existsSync } from "node:fs";
 import { getSession } from "./services/session.server";
 import { useEffect, useState } from "react";
 import Error from "./components/Error";
+import defaultlogo from "/images/logo/logo.svg";
+import { setMetaTag } from "./libs/helper";
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -57,6 +59,18 @@ export async function loader({ request, params }) {
         locale,
         ns
     }
+}
+
+export const meta = () => {
+    const title = "Inkybay Knowledgebase - Product Customization Software for Print Shops";
+    const metaDescription = `"Welcome to the InkyBay Help Center — your one-stop support hub for all things customization! 
+                             Whether you have questions about your order, need help using our design tools, or want to report an issue,
+                             we're here to help."`;
+    const metaImage = defaultlogo;
+    
+    // Set meta tag if null please set value null
+    const metaData = setMetaTag({title, metaImage, metaDescription});
+    return metaData;
 }
 
 export function Layout({ children }) {

@@ -90,11 +90,14 @@ export default function Header({logoData, languages, handleSubmit}) {
             <header className={`Header_nav_bar ${!mobileDropDown && isVisible ? 'top-0' : '-top-80'} ${mobileDropDown&&("top-0")} px-5 px_Header md:py-6 z-50`}>
                 <div className="flex flex-row justify-center items-center gap-2">
                     <Link to="/" >
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
+                        {/* <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
                             <img className="logo_size" src={ logoData? `${logoData?.url}` : defaultlogo} alt="Inybay"/>
-                            <span className="text-[#1A1A1A] text-2xl font-medium sm:text-sm lg:text-[#1A1A1A] font-poppins">{t('help_center')}</span>
-                        </div> 
-                        
+                            <span className="text-[#1A1A1A] text-2xl  font-medium sm:text-sm lg:text-[#1A1A1A] font-poppins">{t('help_center')}</span>
+                        </div>  */}
+                        <div className="flex items-center space-x-1 sm:space-x-2">
+                            <img className="logo_size" src={ logoData? `${logoData?.url}` : defaultlogo} alt="Inybay"/>
+                            <span className="text-[#1A1A1A] text-2xl font-medium font-poppins sm:text-sm lg:text-[#1A1A1A] whitespace-nowrap">{t('help_center')}</span>
+                        </div>
                     </Link>
                 </div>
                 <div className="hidden md:flex items-center gap-4">
