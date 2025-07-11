@@ -352,6 +352,7 @@ export default function Create () {
      */
     useEffect(() => {
         if (actionData) {
+            console.log("actionData=======", actionData)
             if (actionData.target == "create-doc") {
                 setButtonoader(false);
                 if(actionData.isDuplicate){

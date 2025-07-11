@@ -71,7 +71,6 @@ export default function Login(){
     }
 
     const submitForm = async () => {
-
         setButtonoader(true);
         let validated = true;
         const errorMessages = {};
@@ -93,6 +92,12 @@ export default function Login(){
         else {
             setFormError({ ...errorMessages });
             setButtonoader(false);
+        }
+    }
+
+    const handleEnterPress = (event)=> {
+        if(event.key === "Enter"){
+            submitForm();
         }
     }
 
@@ -123,14 +128,14 @@ export default function Login(){
                                         </div>
                                         <div className="my-2">
                                             <label htmlFor="slug" className="text-sm sm:text-md font-bold">Password</label>
-                                            <input onChange={handlePasswordChange} value={formState?.password} type="password" name="slug" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="slug" />
+                                            <input onChange={handlePasswordChange} value={formState?.password} onKeyDown={handleEnterPress} type="password" name="slug" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="slug" />
                                             {formError?.password && (
                                                 <p className="bg-red-100 text-left font-medium">{formError?.password}</p>
                                             )}
                                         </div>
-                                <button disabled={buttonLoader ? true : false} onClick={submitForm}   type="button" className="px-4 py-1 bg-emerald-500 rounded-md text-black text-sm sm:text-lg shadow-md">
-                                    {buttonLoader ?  'Loading..' : "Login"}
-                                </button>
+                                        <button disabled={buttonLoader ? true : false} onClick={submitForm}   type="button" className="px-4 py-1 bg-emerald-500 rounded-md text-black text-sm sm:text-lg shadow-md">
+                                            {buttonLoader ?  'Loading..' : "Login"}
+                                        </button>
                             </form>
                         </div>
                     </div>

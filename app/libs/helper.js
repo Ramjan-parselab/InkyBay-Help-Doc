@@ -76,7 +76,8 @@ export const validatePhone = (phone) => {
  * @returns {Array} An array of meta tag objects, each containing a `name` or `property` and `content`.
  */
 export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImage=null, metaDescription=null, metaType = "article", urlParams=''} ) => {
-    const siteUrl   = `https://docs.inkybay.com${urlParams}`;
+    const baseUrl = `https://docs.inkybay.com`;
+    const siteUrl   = `${baseUrl}${urlParams}`;
     const metaData = [
         { title: `${title}`},
         { name: 'description', content: metaDescription },
@@ -88,7 +89,7 @@ export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImag
         { property: 'og:url', content: siteUrl },
         { tagName: "link", rel: "canonical", href: siteUrl },
         { property: 'og:site_name', content: siteName },
-        { property: 'og:image', content: `${siteUrl}/${metaImage}` },
+        { property: 'og:image', content: `${baseUrl}${metaImage}` },
         { property: 'og:image:width', content: "1200" },
         { property: 'og:image:height', content: "630" },
         { property: 'og:image:alt', content: title },
@@ -100,16 +101,16 @@ export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImag
         { name: 'twitter:creator', content: '@inkybay' },
         { name: 'twitter:description', content: metaDescription },
         { name: 'twitter:url', content: siteUrl },
-        { name: 'twitter:image', content: `${siteUrl}/${metaImage}` },
+        { name: 'twitter:image', content: `${baseUrl}${metaImage}` },
         { name: 'twitter:image:width', content: "800"},
         { name: 'twitter:image:height', content: "600" },
-        { name: 'twitter:url', content: siteUrl },
+        
 
         // Pinterest Meta Tags
         { name: 'pinterest:rich_pin', content: 'true' },
         { name: 'pinterest:title', content: title },
         { name: 'pinterest:description', content: metaDescription },
-        { name: 'pinterest:image', content: `${siteUrl}/${metaImage}` },
+        { name: 'pinterest:image', content: `${baseUrl}${metaImage}` },
     ];
     return metaData;
 }

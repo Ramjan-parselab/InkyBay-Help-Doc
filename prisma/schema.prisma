@@ -112,7 +112,7 @@ model docsLanguage {
     title               String
     shortDescription    String?            @db.MediumText 
     subtitle            String? 
-    content             String             @db.Text
+    content             String             @db.LongText
     section             Int
     docsId              Int
     docs                docs               @relation(fields: [docsId], references: [id])          
