@@ -14,6 +14,7 @@ export default function SearchBar({setBlur}) {
     const [searchOpen, setSearchOpen] = useState(false);
     const [searchResult, setSearchResult] = useState([]);
     const [popularSearchData, setPopularSearchData] = useState([]);
+    const [searchLoader, setSearchLoader] = useState(false);
 
 
     const clearSearchQuery = () => {
@@ -34,6 +35,7 @@ export default function SearchBar({setBlur}) {
             query : query.trim()
         }
         if(query?.length > 2){
+            setSearchLoader(true);
             submit(data, {method: "POST"});
         }
     }
@@ -63,6 +65,7 @@ export default function SearchBar({setBlur}) {
                 // if docsLanguage is empty not need to display this type of result
                 const data = actionData?.data?.length > 0 ? actionData?.data?.filter(item => item?.docsLanguage?.length > 0) : [];
                 setSearchResult(data);
+                setSearchLoader(false);
             }
         }
     }, [actionData]);
@@ -106,7 +109,21 @@ export default function SearchBar({setBlur}) {
 
                         <div className={`absolute top-full left-0 right-0 overflow-hidden z-10 transition-all duration-700 ${searchOpen && (searchQuery?.length > 2) ?("max-h-[1000px]"):("max-h-[0px]")}`}>
                             <div className="bg-white text-start rounded-md shadow-lg border z-50">
+
+                            {/* test */}
+                            {searchLoader ? (
+                                <div className="w-full max-w-4xl bg-white rounded-lg border border-[#eaecf0] shadow-sm overflow-hidden">
+                                    <div className="flex justify-between items-center px-6 py-4 border-b border-[#C0C0C0]">
+                                        <div className="h-10 bg-gray-200   w-full  animate-pulse  bg-muted"></div>
+                                    </div>
+                                </div>
+                            ) : (
                                 <SearchResult searchResult={searchResult}/>
+                            )}
+                            {/* test */}
+
+
+                                
                             </div>
                         </div>
 

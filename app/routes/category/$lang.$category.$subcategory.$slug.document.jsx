@@ -73,17 +73,20 @@ export const loader = async ({request, params})=> {
                             }
                         },
                         where:{
-                            slug: documentSlug
+                            slug: documentSlug,
+                            status: "ACTIVE"
                         }
                     }
                 },
                 where: {
-                    slug: subcategorySlug
+                    slug: subcategorySlug,
+                    status: "ACTIVE"
                 }
             },
         },
         where: {
-            slug: categorySlug
+            slug: categorySlug,
+            status: "ACTIVE"
         }
     });
 
@@ -114,6 +117,9 @@ export const loader = async ({request, params})=> {
                                 }
                             }
                         },
+                        where:{
+                            status: "ACTIVE"
+                        }
                     },
                     categoryLanguage:{
                         select: {
@@ -125,6 +131,9 @@ export const loader = async ({request, params})=> {
                            lang: selectedLanguage
                         }
                     },
+                },
+                where:{
+                    status: "ACTIVE"
                 }
             },
             categoryLanguage:{
@@ -174,7 +183,8 @@ export const loader = async ({request, params})=> {
             }, 
         },
         where: {
-            slug: documentSlug
+            slug: documentSlug,
+            status: "ACTIVE"
         }
     });
 
@@ -202,7 +212,8 @@ export const loader = async ({request, params})=> {
             categoryId: selectedCategory?.subCategory?.[0]?.id,
             NOT:{
                 id: helpDocDetails?.id
-            }
+            },
+            status: "ACTIVE"
         },
     });
 
@@ -243,10 +254,6 @@ export const loader = async ({request, params})=> {
             status: "ACTIVE"
         }
     })
-
-    console.log("============")
-    console.log(nexPageData)
-    console.log("============")
 
     const previousData = await prisma.categories.findFirst({
         select:{
@@ -353,7 +360,7 @@ export const action = async({request, params}) => {
                             shortDescription: true,
                         },
                         where:{
-                            title: {startsWith: query},
+                            title: {contains: query},
                             lang: selectedLanguage ? selectedLanguage: "en"
                         }
                     },

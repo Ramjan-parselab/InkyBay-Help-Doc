@@ -84,9 +84,9 @@ export default function Sidebar({user= null, logo}){
                     <li>
                       <Link to="/admin/supports" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
                           <span className="inline-flex justify-center items-center ml-4">
-                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                < path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zm0 0c2.21 0 4 4.03 4 9s-1.79 9-4 9-4-4.03-4-9 1.79-9 4-9zm0 0c4.97 0 9 4.03 9 9H3c0-4.97 4.03-9 9-9z" />
-                              </svg>
+                            <svg  className="w-5 h-5"  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path   strokeLinecap="round"  strokeLinejoin="round"  strokeWidth="2"  d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                            </svg>
                           </span>
                           <span className="ml-2 text-sm tracking-wide truncate">Supports</span>
                       </Link>
@@ -109,6 +109,16 @@ export default function Sidebar({user= null, logo}){
                               </svg>
                           </span>
                           <span className="ml-2 text-sm tracking-wide truncate">Users</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/pages" className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                          <span className="inline-flex justify-center items-center ml-4">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"  d="M7 7h10M7 11h10M7 15h6M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+                          </svg>
+                          </span>
+                          <span className="ml-2 text-sm tracking-wide truncate">Pages</span>
                       </Link>
                     </li>
                     

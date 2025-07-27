@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import prisma from "../../../db.server";
 import { ImageOff } from "lucide-react";
 import fs from "node:fs";
+import jsonFile from "node:fs/promises";
+import path from "path";
 
 export const loader = async({params}) => {
     // find out category last serial number
@@ -13,9 +15,21 @@ export const loader = async({params}) => {
         },
     });
 
+    let transLationData = {};
+    // Translation Json file  data edit
+    if(language?.id){
+        try {
+            const filePath = path.join(process.cwd(), "public", "locales", language?.code, "common.json");
+            transLationData = await jsonFile.readFile(filePath, "utf-8");
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return {
         data:{
             language: language,
+            transLationData: transLationData
         }
     };
 }
@@ -133,6 +147,26 @@ export const action = async ({request}) => {
                 data: [],
             }
         }
+    }else if(target === "update-translation"){
+        const langCode = formData.get("lang") || "";
+        const data = formData.get("data") || "";
+
+        try{
+            const filePath = path.join(process.cwd(), "public", "locales", langCode, "common.json");
+            const updated = await  jsonFile.writeFile(filePath, data, "utf-8");
+            return {
+                target: target,
+                message: "Successfully ! Language translation  has been updated",
+                data: [],
+            }
+        }catch(error){
+             return {
+                target: target,
+                message: "Language translation update failed please try again !!",
+                data: [],
+            }
+        }
+        
     }
 
 }
@@ -145,6 +179,7 @@ export default function Edit () {
 
     const [pageLoader, setPageLoader] = useState(false);
     const [buttonLoader, setButtonoader] = useState(false);
+    const [translations, setTranslations] = useState(""); 
     
     const [formState, setFormState] = useState({
         id: "",
@@ -176,6 +211,9 @@ export default function Edit () {
     }
     const handleStatusChange = (event)=> {
         setFormState({...formState, status: event.target.value});
+    }
+    const handleTranslationValue = (key, value) => {
+        setTranslations((prev)=> ({...prev, [key]: value}));
     }
 
     const submitForm = async () => {
@@ -219,6 +257,16 @@ export default function Edit () {
         }
     }
 
+    // Update translation json file
+    const updateTranslation = async () => {
+        setButtonoader(true);
+        const formData = new FormData();
+        formData.append("target", "update-translation");
+        formData.append("lang", formState.code);
+        formData.append("data", JSON.stringify(translations));
+        submit(formData, { method: "POST", encType: "multipart/form-data"});
+    }
+
     useEffect(()=> {
         setPageLoader(true);
         if(loaderData){
@@ -232,6 +280,9 @@ export default function Edit () {
                     status: languageData?.status ? languageData?.status : "",
                     oldFlug: languageData?.flug ? languageData?.flug : "",
                 });
+            }
+            if(loaderData?.data?.transLationData){
+                setTranslations(JSON.parse(loaderData?.data?.transLationData))
             }
         }
         setPageLoader(false)
@@ -252,6 +303,9 @@ export default function Edit () {
                     alert(actionData.message);
                     location.reload()
                 }
+            }else if (actionData.target == "update-translation") {
+                setButtonoader(false);
+                alert(actionData.message);
             }
         }
     }, [actionData]);
@@ -339,13 +393,45 @@ export default function Edit () {
                                             
                                             
                                             <button disabled={buttonLoader ? true : false} onClick={submitForm} type="button" className="px-4 py-1 bg-emerald-500 rounded-md text-black text-sm sm:text-lg shadow-md">
-                                                {buttonLoader ?  'Loading..' : "Update"}
+                                                {buttonLoader ?  'Loading..' : "Update language"}
                                             </button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div className="relative mt-4 flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+                            <table className="w-full text-left table-auto min-w-max">
+                                <thead>
+                                <tr className="border-b border-slate-300 bg-slate-50">
+                                    <th className="p-4 text-sm font-normal leading-none text-slate-500">Key</th>
+                                    <th className="p-4 text-sm font-normal leading-none text-slate-500">Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.entries(translations)?.length > 0 && Object.entries(translations).map(([key, value]) => (
+                                    <tr key={key} className="hover:bg-slate-50">
+                                        <td width={150} className="p-4 border-b border-slate-200 py-5">
+                                            <p className="block font-semibold text-sm text-slate-800"> {key} </p>
+                                        </td>
+                                        <td className="p-4 border-b border-slate-200 py-5">
+                                            <input
+                                                className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none"
+                                                type="text"
+                                                name={key}
+                                                value={value}
+                                                onChange={e => handleTranslationValue(key, e.target.value)}
+                                            />
+                                        </td>
+                                    </tr>
+                                     ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <button disabled={buttonLoader ? true : false} onClick={updateTranslation} type="button" className="px-4 py-1 mt-5 bg-emerald-500 rounded-md text-black text-sm sm:text-lg shadow-md">
+                                {buttonLoader ?  'Loading..' : "Update Translation"}
+                            </button>
                     </div>
                 )}
         </>

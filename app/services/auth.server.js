@@ -33,7 +33,7 @@ authenticator.use(
 export const login = async (email, password) => {
     // Find out user info by using mail
     const user = await prisma.users.findFirst({
-        where: { email: email }, orderBy: { id: 'desc' }
+        where: { email: email, status: "ACTIVE" }, orderBy: { id: 'desc' }
     });
     if (user) {
         // Hash password check for login if password not match user cant not access

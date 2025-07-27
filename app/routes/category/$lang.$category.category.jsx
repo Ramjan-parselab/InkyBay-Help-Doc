@@ -66,6 +66,9 @@ export const loader = async ({request, params})=> {
                         where: { lang: selectedLanguage }
                     },
                 },
+                where:{
+                    status: "ACTIVE"
+                }
             },
             categoryLanguage:{
                 select: {
@@ -131,7 +134,7 @@ export const action = async({request, params})=> {
                             shortDescription: true,
                         },
                         where:{
-                            title: {startsWith: query},
+                            title: {contains: query},
                             lang: selectedLanguage ? selectedLanguage: "en"
                         }
                     },

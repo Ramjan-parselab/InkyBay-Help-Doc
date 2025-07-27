@@ -53,6 +53,12 @@ enum StatusType {
     INACTIVE
 }
 
+enum PageStatus {
+    ACTIVE
+    INACTIVE
+    DRAFT
+}
+
 model users {
     id                  Int                @id @default(autoincrement())
     name                String
@@ -202,5 +208,26 @@ model tickets {
     description         String?          @db.MediumText
     attachFile          String?                
     createdAt           DateTime         @default(now())              
+}
+
+model pages {
+    id                  Int              @id @default(autoincrement())
+    name                String
+    slug                String           @unique
+    status              PageStatus       @default(ACTIVE)
+    createdAt           DateTime         @default(now())
+    updatedAt           DateTime?
+    pageLanguage        pageLanguage[]
+}
+
+model pageLanguage {
+    id                 Int              @id @default(autoincrement())
+    lang               String
+    name               String 
+    title              String
+    content            String           @db.LongText
+    section            Int
+    pageId             Int
+    page               pages            @relation(fields: [pageId], references: [id])              
 }
     

@@ -3,6 +3,7 @@ import { Link, useActionData, useNavigate, useSubmit } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import prisma from "../../../db.server";
 import { Toaster, toast } from 'sonner';
+import { createTranslationFile } from "../../../libs/helper";
 
 export const action = async ({request}) => {
     const allowedTypes = ["image/jpeg", "image/png", "image/svg+xml"];
@@ -78,6 +79,9 @@ export const action = async ({request}) => {
                     createdAt: new Date()
                 }
             });
+
+            // Create translation json file
+            createTranslationFile(code);
 
             return {
                 target: target,

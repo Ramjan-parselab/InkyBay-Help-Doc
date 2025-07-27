@@ -1,3 +1,6 @@
+import jsonFile from "node:fs/promises";
+import path from "node:path";
+
 /**
  * 
  * @param {string or object} text - This params expect full text  
@@ -113,4 +116,36 @@ export const setMetaTag = ({siteName="InkyBay Help Center", title=null, metaImag
         { name: 'pinterest:image', content: `${baseUrl}${metaImage}` },
     ];
     return metaData;
+}
+
+/**
+ * 
+ * @param {langCode} langCode - langCode is a short code 
+ * @returns 
+ */
+export const createTranslationFile = async (langCode) => {
+    if(!langCode){
+        return false;
+    }
+    const baseDir = path.join(process.cwd(), "public", "locales");
+    const sourcePath = path.join(baseDir, "en", "common.json");
+    const targetDir = path.join(baseDir, langCode);
+    const targetPath = path.join(targetDir, "common.json");
+    
+    try {
+        const data  = await jsonFile.readFile(sourcePath, "utf-8");
+
+        try {
+           await jsonFile.access(targetDir);
+        } catch (error) {
+            await jsonFile.mkdir(targetDir, { recursive: true });
+        }
+
+       await jsonFile.writeFile(targetPath, data, "utf-8");
+       return true;
+
+    } catch (error) {
+        console.error("Failed to create translation file:", error);
+        return false;
+    }
 }

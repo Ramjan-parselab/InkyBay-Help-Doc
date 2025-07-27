@@ -25,6 +25,7 @@ export default defineConfig({
                     route("docs", "routes/$lang.docs.jsx");
                     route("privacy", "routes/$lang.privacy.jsx");
                     route("terms", "routes/$lang.terms.jsx");
+                    route("pages/:slug", "routes/$lang.$page.jsx");
                 });
                 
                 // Categories routes
@@ -90,6 +91,12 @@ export default defineConfig({
                         route("", "routes/admin/docs/_index.jsx", {index: true});
                         route("create", "routes/admin/docs/create.jsx");
                         route(":id", "routes/admin/docs/edit.jsx");
+                    });
+
+                    route("pages", "routes/admin/pages/page.jsx", ()=>{
+                        route("", "routes/admin/pages/_index.jsx", {index: true});
+                        route("create", "routes/admin/pages/create.jsx");
+                        route(":id", "routes/admin/pages/edit.jsx");
                     });
                     
                     route("settings", "routes/admin/settings.jsx");
