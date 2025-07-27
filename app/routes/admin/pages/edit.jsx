@@ -392,7 +392,7 @@ export default function Create () {
                                                         <p className="bg-red-100 text-left font-medium">{formError?.slug}</p>
                                                     )}
                                                     {formState?.slug && (
-                                                        <p className="bg-yellow-200 text-left font-medium pl-2">{`Live link: inkybay.com/en/pages/${formState?.slug}`}</p>
+                                                        <p className="bg-yellow-200 text-left font-medium pl-2">{`Live link: https://docs.inkybay.com/en/pages/${formState?.slug}`}</p>
                                                     )}
                                                 </div>
                                                 <div className="grid w-full grid-cols-2  gap-6 my-4">
