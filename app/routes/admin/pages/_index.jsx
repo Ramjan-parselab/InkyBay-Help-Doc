@@ -9,7 +9,7 @@ export const loader = async ({ request })=> {
     let pages=[];
     // If category params found in url, then params will try to macth with the category name
     if(query){
-        pages = await prisma.pages.findMany({
+        pages = await prisma?.pages?.findMany({
             select: {
                 id: true, name:true, slug: true,  status: true,
             },
@@ -28,7 +28,7 @@ export const loader = async ({ request })=> {
             }
         });
     }else{
-        pages = await prisma.pages.findMany({
+        pages = await prisma?.pages?.findMany({
             select: {
                 id: true, name:true, slug: true,  status: true,
             },
@@ -44,7 +44,7 @@ export const loader = async ({ request })=> {
         data: {
             pages: pages,
         }
-    };
+    }
 }
 
 export const action = async ({request}) => {

@@ -4,7 +4,7 @@ import { Toaster, toast } from 'sonner';
 import RichTextEditor from "../../../components/rich-text-editor";
 import prisma from "../../../db.server";
 
-export const loader = async({params}) => {
+export const loader = async({ params}) => {
     const singlepage = await prisma.pages.findFirst({
         select:{
             id: true, name: true, slug: true, status: true,
