@@ -54,11 +54,11 @@ export const loader = async({request, params})=> {
     }
 }
 
-export const meta = ({ params }) => {
-    const title = "InkyBay - Product Customizer - Privacy Policy";
+export const meta = ({ data, params }) => {
+    const title = `InkyBay - Product Customizer - ${data?.data?.pageData?.pageLanguage?.[0]?.name}`;
     const metaDescription = `InkyBay - Product Customizer Software for Shopify, Privacy Policy`
     const metaImage = defaultlogo;
-    const urlParams = `/${params?.lang}/privacy`;
+    const urlParams = `/${params?.lang}/${data?.data?.pageData?.slug}`;
     
     // Set meta tag if null please set value null
     const metaData = setMetaTag({title, metaImage, metaDescription, urlParams});
@@ -76,12 +76,9 @@ export default function CustomPage() {
         }
     }, [loaderData]);
 
-   
-    console.log(pageData)
-
     return (
         <div className="w-full">
-            <Breadcrumb selectedCategory={''} activePage={pageData?.name} showSearchBar={false}/>
+            <Breadcrumb selectedCategory={''} activePage={pageData?.pageLanguage?.[0]?.name} showSearchBar={false}/>
             <section className="w-full">
                 <div className="container flex justify-center items-center py-10 px-5">
                     <div className="flex flex-col justify-center items-center gap-12">
@@ -108,7 +105,7 @@ export default function CustomPage() {
                         <div className="documantation_details_section">
                             <div className="text-[#212121] documantation_paragraph_section">
                                     <div className="documantation_details_section">
-                                        <h4 className="text-[#16171A]">t{("data_not_found")}</h4>
+                                        <h4 className="text-[#16171A]">{t("result_not_found")}</h4>
                                     </div>
                                 </div>
                         </div>
