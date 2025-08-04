@@ -276,10 +276,10 @@ export default function Create () {
                 if(actionData.isDuplicate){
                     toast.warning(actionData.message, {style: { background: "#EDDD53", color: "black" } });
                 }else{
-                    // toast.success(actionData.message, {style: { background: "#66C25F", color: "white" } });
-                    // setTimeout(()=> {
-                    //     navigate("/admin/pages", {replace: true});
-                    // }, 2000)
+                    toast.success(actionData.message, {style: { background: "#66C25F", color: "white" } });
+                    setTimeout(()=> {
+                        navigate("/admin/pages", {replace: true});
+                    }, 2000)
                 
                 }
             }
