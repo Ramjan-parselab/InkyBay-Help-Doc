@@ -1,11 +1,11 @@
 import { unstable_createFileUploadHandler, unstable_parseMultipartFormData } from "@remix-run/node";
 import { Link, useActionData, useLoaderData, useSubmit } from "@remix-run/react";
-import { useEffect, useState } from "react";
-import prisma from "../../../db.server";
 import { ImageOff } from "lucide-react";
 import fs from "node:fs";
 import jsonFile from "node:fs/promises";
 import path from "path";
+import { useEffect, useState } from "react";
+import prisma from "../../../db.server";
 
 export const loader = async({params}) => {
     // find out category last serial number
@@ -153,7 +153,10 @@ export const action = async ({request}) => {
 
         try{
             const filePath = path.join(process.cwd(), "public", "locales", langCode, "common.json");
-            const updated = await  jsonFile.writeFile(filePath, data, "utf-8");
+            
+            const parseData = JSON.parse(data);
+            const jsonData = JSON.stringify(parseData, null, 4);
+            const updated = await  jsonFile.writeFile(filePath, jsonData, "utf-8");
             return {
                 target: target,
                 message: "Successfully ! Language translation  has been updated",
@@ -196,6 +199,16 @@ export default function Edit () {
         code:"",
         status: "",
     });
+
+    const supportedLngs=  ["af", "am", "ar", "az", "be", "bg", "bn", "bs", "ca", "cs", "cy", "da", "de",
+		"el", "en", "eo", "es", "et", "eu", "fa", "fi", "fr", "ga", "gl", "gu", "he",
+		"hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "jv", "ka", "kk", "km",
+		"kn", "ko", "ku", "ky", "la", "lb", "lo", "lt", "lv", "mg", "mi", "mk", "ml",
+		"mn", "mr", "ms", "mt", "my", "ne", "nl", "no", "ny", "pa", "pl", "ps", "pt",
+		"ro", "ru", "rw", "sd", "si", "sk", "sl", "sm", "sn", "so", "sq", "sr", "st",
+		"su", "sv", "sw", "ta", "te", "tg", "th", "tk", "tl", "tr", "tt", "ug", "uk",
+		"ur", "uz", "vi", "xh", "yi", "yo", "zh", "zh-CN", "zh-TW", "zu", "pt-BR"
+	];
 
     
 
@@ -281,7 +294,7 @@ export default function Edit () {
                     oldFlug: languageData?.flug ? languageData?.flug : "",
                 });
             }
-            if(loaderData?.data?.transLationData){
+            if(typeof loaderData?.data?.transLationData == "string"){
                 setTranslations(JSON.parse(loaderData?.data?.transLationData))
             }
         }
@@ -361,7 +374,14 @@ export default function Edit () {
                                                 <div className="relative flex flex-col">
                                                     <div className="my-2">
                                                         <label htmlFor="name" className="text-sm sm:text-md font-bold">Code</label>
-                                                        <input onChange={handleCodeChange} value={formState?.code} type="text" name="code" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="code" />
+                                                         {/* <input onChange={handleCodeChange} value={formState?.code} type="text" name="code" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="code" />*/}
+                                                        <select onChange={handleCodeChange} value={formState?.code} type="text" name="code" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="code">
+                                                            <option value="">Select code</option>
+                                                            {supportedLngs.length > 0 && supportedLngs.map((item)=> (
+                                                                <option value={item}>{item}</option>
+                                                            ))}
+                                                            
+                                                        </select>
                                                         {formError?.code && (
                                                             <p className="bg-red-100 text-left font-medium">{formError?.code}</p>
                                                         )}
@@ -369,7 +389,7 @@ export default function Edit () {
                                                     <div className="my-2">
                                                         <label htmlFor="status" className="text-sm sm:text-md font-bold">Status</label>
                                                         <select onChange={handleStatusChange} value={formState?.status} className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="status">
-                                                            <option value="ACTIVE">Active</option>
+                                                            <option value="ACTIVE">Active</option> 
                                                             <option value="INACTIVE">Inactive</option>
                                                         </select>
                                                         {formError?.status && (

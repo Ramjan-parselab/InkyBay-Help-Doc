@@ -19,7 +19,7 @@ async function hydrate() {
 				...i18n, // spread the configuration
 				// This function detects the namespaces your routes rendered while SSR use
 				ns: getInitialNamespaces(),
-				backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
+				backend: { loadPath: `/api/locales/{{lng}}/{{ns}}` },
 				detection: {
 					// Here only enable htmlTag detection, we'll detect the language only
 					// server-side with remix-i18next, by using the `<html lang>` attribute

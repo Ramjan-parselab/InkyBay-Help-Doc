@@ -1,8 +1,8 @@
 import { unstable_createFileUploadHandler, unstable_parseMultipartFormData } from "@remix-run/node";
 import { Link, useActionData, useNavigate, useSubmit } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import prisma from "../../../db.server";
 import { Toaster, toast } from 'sonner';
+import prisma from "../../../db.server";
 import { createTranslationFile } from "../../../libs/helper";
 
 export const action = async ({request}) => {
@@ -122,6 +122,16 @@ export default function Create () {
         code:"",
         status: "",
     });
+
+    const supportedLngs=  ["af", "am", "ar", "az", "be", "bg", "bn", "bs", "ca", "cs", "cy", "da", "de",
+		"el", "en", "eo", "es", "et", "eu", "fa", "fi", "fr", "ga", "gl", "gu", "he",
+		"hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "jv", "ka", "kk", "km",
+		"kn", "ko", "ku", "ky", "la", "lb", "lo", "lt", "lv", "mg", "mi", "mk", "ml",
+		"mn", "mr", "ms", "mt", "my", "ne", "nl", "no", "ny", "pa", "pl", "ps", "pt",
+		"ro", "ru", "rw", "sd", "si", "sk", "sl", "sm", "sn", "so", "sq", "sr", "st",
+		"su", "sv", "sw", "ta", "te", "tg", "th", "tk", "tl", "tr", "tt", "ug", "uk",
+		"ur", "uz", "vi", "xh", "yi", "yo", "zh", "zh-CN", "zh-TW", "zu", "pt-BR"
+	];
 
     const handleNameChange = (event)=> {
         setFormState({...formState, name: event.target.value});
@@ -256,8 +266,14 @@ export default function Create () {
                                                 </div>
                                                 <div className="relative flex flex-col">
                                                     <div className="my-2">
-                                                        <label htmlFor="name" className="text-sm sm:text-md font-bold">Code</label>
-                                                        <input onChange={handleCodeChange} value={formState?.code} type="text" name="code" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="code" />
+                                                        <label htmlFor="name" className="text-sm sm:text-md font-bold">Code</label>                                                        
+                                                        <select onChange={handleCodeChange} value={formState?.code} type="text" name="code" className="block w-full px-2 py-2 text-sm sm:text-md rounded-md my-2 bg-gray-100 text-gray-900   outline-none" id="code">
+                                                            <option value="">Select code</option>
+                                                            {supportedLngs.length > 0 && supportedLngs.map((item)=> (
+                                                                <option value={item}>{item}</option>
+                                                            ))}
+                                                            
+                                                        </select>
                                                         {formError?.code && (
                                                             <p className="bg-red-100 text-left font-medium">{formError?.code}</p>
                                                         )}

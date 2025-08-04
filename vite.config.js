@@ -36,6 +36,9 @@ export default defineConfig({
                 });
 
 
+                route("api/locales/:lng/:ns", "routes/api.locales.$lng.$ns.jsx");
+
+                
                   route("sitemap.xml", "routes/sitemap/_index.jsx");
                   route("sitemap", "routes/sitemap/sitemap.jsx", ()=> {
                         route("main.xml", "routes/sitemap/main.jsx");
